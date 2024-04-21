@@ -8,7 +8,7 @@ COPY ./prisma/seed.ts ./prisma/seed.ts
 COPY package.json .
 
 RUN npm install -g prisma
-RUN npm install typescript ts-node
+RUN npm install ts-node
 
 #Push the schema to the database and seed the database
 CMD npx prisma db push --skip-generate && npx prisma db seed
