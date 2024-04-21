@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_USER: cascade
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres -U cascade"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+  db-migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile.db-migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://cascade:${POSTGRES_PASSWORD}@host.docker.internal:5432/postgres?connect_timeout=300"
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.webapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      db-migrate:
+        condition: service_completed_successfully
+    links:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://cascade:${POSTGRES_PASSWORD}@host.docker.internal:5432/postgres?connect_timeout=300"
+      NEXTAUTH_SECRET: $NEXTAUTH_SECRET
+      NEXTAUTH_URL: $NEXTAUTH_URL
+      ADMIN_PASSWORD: $ADMIN_PASSWORD
+
+volumes:
+  db_data:
