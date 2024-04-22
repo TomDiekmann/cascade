@@ -1,6 +1,9 @@
+import { redirect } from "next/navigation";
 import React from "react";
 
 const AdminPage = () => {
+  redirect("/admin/courses");
+
   return (
     <div className="p-8">
       <div className="flex flex-col gap-4 max-w-7xl mx-auto">

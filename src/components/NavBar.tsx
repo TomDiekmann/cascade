@@ -11,6 +11,7 @@ import {
 } from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { navigationMenuTriggerStyle } from "./ui/navigation-menu";
+import CourseSearch from "./CourseSearch";
 
 const NavBar = () => {
   return (
@@ -35,14 +36,7 @@ const NavBar = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="relative flex-1 md:grow-0">
-          <Search className="absolute left-2.5 top-3 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Nach Videos oder Kursen suchen"
-            className="w-full bg-background pl-8 md:w-[200px] lg:w-[336px]"
-          />
-        </div>
+        {/* <CourseSearch /> */}
       </div>
     </div>
   );

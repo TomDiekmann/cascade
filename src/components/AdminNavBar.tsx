@@ -19,7 +19,7 @@ const NavBar = () => {
       <div className="flex flex-row items-center gap-8 max-w-7xl mx-auto">
         <Link href="/admin">
           <span className="text-primary text-xl font-semibold">
-            vrdios / Admin
+            cascade / Admin
           </span>
         </Link>
         <NavigationMenu className="flex-grow">
@@ -30,7 +30,7 @@ const NavBar = () => {
                   Kurse
                 </NavigationMenuLink>
               </Link>
-              <Link href="/admin/courses" legacyBehavior passHref>
+              <Link href="/admin/backups" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Sicherung
                 </NavigationMenuLink>
